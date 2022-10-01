@@ -2,15 +2,20 @@ import Bot from '../../shared/assets/Logo.svg'
 import { Button } from '../Button'
 import styled from 'styled-components'
 
-export const CardMember = () => {
+interface CardMemberProps {
+  nameUser: string
+  country: string
+}
+
+export const CardMember = ({ nameUser, country }: CardMemberProps) => {
   return (
     <TableItemMember>
       <Section>
         <Avatar src={Bot} />
-        <NameTitle>InBotces</NameTitle>
+        <NameTitle>{nameUser}</NameTitle>
       </Section>
       <Info>Developer</Info>
-      <Info>PE</Info>
+      <Info>{country}</Info>
       <Info>9 USD</Info>
       <Info>298:49:14</Info>
       <Section>
