@@ -6,7 +6,6 @@ import { HeaderMembers } from '../HeaderMembers/HeaderMembers'
 import NavBarFilter from '../NavBarFilter/NavBarFilter'
 import { getUsersAxios } from '../../shared/services/usersServices'
 import styled from 'styled-components'
-import { useGeneralContext } from '../../shared/contexts/StoreProvider'
 
 export default function UserList() {
   const [users, setUsers] = useState([])
