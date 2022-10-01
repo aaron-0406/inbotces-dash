@@ -2,8 +2,22 @@ import styled from 'styled-components'
 import { Dashboard } from '../../../ui/Dashboard/Dashboard'
 import { Header } from '../../../ui/Header/Header'
 import UserList from '../../../ui/UsersList/UserList'
+import queryString from 'query-string'
+import { useEffect } from 'react'
+import { useGeneralContext } from '../../../shared/contexts/StoreProvider'
 
 export const Home = () => {
+  const { setCode } = useGeneralContext()
+
+  const getCodeUrl = () => {
+    const search = queryString.parse(window.location.search) as { code: string }
+    if (search && search.code.length) setCode(search.code)
+  }
+
+  useEffect(() => {
+    getCodeUrl()
+  }, [])
+
   return (
     <Container>
       <Dashboard />

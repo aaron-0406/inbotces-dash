@@ -2,16 +2,36 @@ import { CardMember } from '../CardMember/CardMember'
 import { HeaderMembers } from '../HeaderMembers/HeaderMembers'
 import NavBarFilter from '../NavBarFilter/NavBarFilter'
 import styled from 'styled-components'
+import { useGeneralContext } from '../../shared/contexts/StoreProvider'
+import { AxiosResponse } from 'axios'
+import { getUsersAxios } from '../../shared/services/usersServices'
+import { useEffect, useState } from 'react'
 
 export default function UserList() {
-  const quant = Array.from(Array(8))
+  const [users, setUsers] = useState([])
+
+  const getUsers = async () => {
+    try {
+      const result: AxiosResponse<any, any> = await getUsersAxios()
+      if (result) {
+        setUsers(result.data)
+      }
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
+  useEffect(() => {
+    getUsers()
+  }, [])
+
   return (
     <Container>
       <NavBarFilter />
       <HeaderMembers />
       <Scroll>
-        {quant.map(() => {
-          return <CardMember />
+        {users.map((user: any) => {
+          return <CardMember nameUser={user.name} country={user.country} />
         })}
       </Scroll>
     </Container>
