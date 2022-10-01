@@ -31,10 +31,16 @@ export default function UserList() {
       <NavBarFilter />
       <HeaderMembers />
       <Scroll>
-        {
-            users &&
-        users.map((user: any) => {
-          return <CardMember nameUser={user.name} country={user.country} />
+        {users.map((user: any) => {
+          return (
+            <CardMember
+              nameUser={user.name}
+              country={user.country}
+              wageAmount={user.wage}
+              totalTime={user.totalTime}
+              status={user.status}
+            />
+          )
         })}
       </Scroll>
     </Container>

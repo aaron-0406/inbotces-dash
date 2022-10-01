@@ -1,7 +1,7 @@
-import {SubmitHandler, useForm} from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form'
 import { useEffect, useState } from 'react'
 
-import { API } from '../../shared/utils/constant/api';
+import { API } from '../../shared/utils/constant/api'
 import Box from '@mui/material/Box'
 import { Button } from '../Button'
 import CardTemplate from './CardTemplate';
