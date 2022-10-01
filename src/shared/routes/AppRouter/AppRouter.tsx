@@ -1,5 +1,6 @@
 import { Route } from 'react-router-dom'
 import Home from '../../../pages/Dash/Home'
+import Settings from '../../../pages/Dash/Settings'
 import Login from '../../../pages/Login'
 import NotFound from '../../../pages/NotFound'
 import AppSwitch from '../AppSwitch'
@@ -16,6 +17,7 @@ const AppRouter = () => {
       </Route>
       <Route element={<ProtectedRoute />}>
         <Route path={paths.general.home} element={<Home />} />
+        <Route path={paths.general.setting} element={<Settings />} />
       </Route>
       {/* <Route path="*" element={<NotFound />} /> */}
     </AppSwitch>

@@ -1,26 +1,22 @@
-import {Button} from 'antd';
-import styled from 'styled-components';
+import { Button as ButtonAnt } from 'antd'
+import styled from 'styled-components'
 
 interface ButtonInterface {
-  backgroundColor?: string;
-  border?: string;
-  borderColor?: string;
-  textColor?: string;
-  disable?: boolean;
+  backgroundColor?: string
+  border?: string
+  borderColor?: string
+  textColor?: string
+  disable?: boolean
 }
 
-const ButtonD = styled(Button)<ButtonInterface>`
-  background-color: ${props =>
-    props.backgroundColor
-      ? props.backgroundColor
-      : 'white'};
+const Button = styled(ButtonAnt)<ButtonInterface>`
+  background-color: ${(props) => (props.backgroundColor ? props.backgroundColor : 'white')};
   cursor: pointer;
   height: calc(24px + 2vmin);
   width: calc(71px + 2vmin);
-  border-radius: ${props => (props.border ? props.border : '8px')};
-  color: ${props => (props.textColor ? props.textColor : 'black')};
-  border-color: ${props =>
-    props.borderColor ? props.borderColor : 'white'};
+  border-radius: ${(props) => (props.border ? props.border : '8px')};
+  color: ${(props) => (props.textColor ? props.textColor : 'black')};
+  border-color: ${(props) => (props.borderColor ? props.borderColor : 'white')};
 
   font-family: 'Raleway';
   font-style: normal;
@@ -32,10 +28,9 @@ const ButtonD = styled(Button)<ButtonInterface>`
   font-feature-settings: 'pnum' on, 'lnum' on;
 
   /*:hover {
-    background-color: ${props =>
-      props.disable ? '' : 'white'};
-    color: ${props => (props.disable ? '' : 'white')};
+    background-color: ${(props) => (props.disable ? '' : 'white')};
+    color: ${(props) => (props.disable ? '' : 'white')};
   }*/
-`;
+`
 
-export default ButtonD;
+export default Button
