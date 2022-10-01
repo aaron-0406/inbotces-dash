@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { API } from '../../shared/utils/constant/api';
 import Box from '@mui/material/Box'
 import { Button } from '../Button'
+import CardTemplate from './CardTemplate';
 import Drawer from '@mui/material/Drawer'
 import HeaderTemplate from './HeaderTemplate'
 import axios from 'axios'
@@ -23,12 +24,14 @@ export interface IFormInput {
 export const TemplateForm = () => {
   const [state, setState] = useState({ right: false })
   const { register, handleSubmit } = useForm<IFormInput>();
+  const [template, setTemplate] = useState([]);
   
     useEffect(()=> {
         const getTemplates = async () => {
             try {
                 const {data} = await axios.get(`${API}/template`)
                 console.log(data)
+                setTemplate(data)
             } catch (error) {
                 console.log(error)
             }
@@ -113,6 +116,14 @@ export const TemplateForm = () => {
       <Drawer anchor={'right'} open={state['right']} onClose={toggleDrawer('right', false)}>
         {list('right')}
       </Drawer>
+
+      {
+        template.map(item => {
+            return (
+                <CardTemplate template={item}/>
+            )
+        })
+      }
     </Container>
   )
 }
