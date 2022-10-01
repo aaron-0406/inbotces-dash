@@ -1,5 +1,5 @@
-import styled from 'styled-components'
 import RavnLogo from '../../shared/assets/RavnAvatar.svg'
+import styled from 'styled-components'
 
 export const Header = () => {
   return (

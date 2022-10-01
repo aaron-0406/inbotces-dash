@@ -1,8 +1,8 @@
+import { Button } from '../Button'
 import { Link } from 'react-router-dom'
-import styled from 'styled-components'
 import LogoDash from '../../shared/assets/LogoDash.svg'
 import paths from '../../shared/routes/paths'
-import { Button } from '../Button'
+import styled from 'styled-components'
 
 export const Dashboard = () => {
   return (
