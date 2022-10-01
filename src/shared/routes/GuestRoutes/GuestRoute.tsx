@@ -4,7 +4,7 @@ import paths from '../paths'
 import RedirectRoute from '../RedirectRoute'
 
 export const GuestRoute = () => {
-  if (true) {
+  if (false) {
     return <RedirectRoute pathname={paths.general.home} />
   }
 
