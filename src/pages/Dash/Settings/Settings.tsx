@@ -1,15 +1,15 @@
 import styled from 'styled-components'
 import { Dashboard } from '../../../ui/Dashboard/Dashboard'
 import { Header } from '../../../ui/Header/Header'
-import UserList from '../../../ui/UsersList/UserList'
+import { TemplateForm } from '../../../ui/Template/Template'
 
-export const Home = () => {
+export const Settings = () => {
   return (
     <Container>
       <Dashboard />
       <Container style={{ flexDirection: 'column' }}>
         <Header />
-        <UserList />
+        <TemplateForm />
       </Container>
     </Container>
   )
