@@ -1,10 +1,12 @@
+import { useEffect, useState } from 'react'
+
+import { AxiosResponse } from 'axios'
 import { CardMember } from '../CardMember/CardMember'
 import { HeaderMembers } from '../HeaderMembers/HeaderMembers'
 import NavBarFilter from '../NavBarFilter/NavBarFilter'
-import styled from 'styled-components'
-import { AxiosResponse } from 'axios'
 import { getUsersAxios } from '../../shared/services/usersServices'
-import { useEffect, useState } from 'react'
+import styled from 'styled-components'
+import { useGeneralContext } from '../../shared/contexts/StoreProvider'
 
 export default function UserList() {
   const [users, setUsers] = useState([])

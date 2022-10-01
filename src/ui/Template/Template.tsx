@@ -4,37 +4,40 @@ import { useEffect, useState } from 'react'
 import { API } from '../../shared/utils/constant/api'
 import Box from '@mui/material/Box'
 import { Button } from '../Button'
+import CardTemplate from './CardTemplate';
 import Drawer from '@mui/material/Drawer'
 import HeaderTemplate from './HeaderTemplate'
 import axios from 'axios'
 import styled from 'styled-components'
 
 enum LocationEnum {
-  PE = 'PE',
-  USD = 'USA',
-  SV = 'SV',
-}
+    PE = "PE",
+    USD = "USA",
+    SV = "SV"
+  }
 export interface IFormInput {
-  location: LocationEnum | undefined
-  template: string | undefined
-  description: string | undefined
-}
+    location: LocationEnum | undefined;
+    template: string | undefined;
+    description: string | undefined;
+  }
 
 export const TemplateForm = () => {
   const [state, setState] = useState({ right: false })
-  const { register, handleSubmit } = useForm<IFormInput>()
-
-  useEffect(() => {
-    const getTemplates = async () => {
-      try {
-        const { data } = await axios.get(`${API}/template`)
-        console.log(data)
-      } catch (error) {
-        console.log(error)
-      }
-    }
-    getTemplates()
-  }, [])
+  const { register, handleSubmit } = useForm<IFormInput>();
+  const [template, setTemplate] = useState([]);
+  
+    useEffect(()=> {
+        const getTemplates = async () => {
+            try {
+                const {data} = await axios.get(`${API}/template`)
+                console.log(data)
+                setTemplate(data)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        getTemplates();
+    },[])
 
   const toggleDrawer = (anchor: 'right', open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
     if (
@@ -47,25 +50,28 @@ export const TemplateForm = () => {
     setState({ ...state, [anchor]: open })
   }
 
-  const onSubmit: SubmitHandler<IFormInput> = async (data) => {
+  const onSubmit: SubmitHandler<IFormInput> = async data => {
     console.log(data)
     try {
-      const resp = await axios.post(`${API}/template`, {
-        template: data.template,
-        location: data.location,
-        description: data.description,
-      })
-      if (!resp) {
-        return console.log('error')
-      }
-      toggleDrawer('right', false)
+        const resp = await axios.post(`${API}/template/`, {
+            template: data.template,
+            location: data.location,
+            description: data.description
+        })
+        if(!resp){
+            return console.log("error")
+        }
+        toggleDrawer('right', false);
     } catch (error) {
-      console.log(error)
+        console.log(error)
     }
-  }
+  };
 
   const list = (anchor: 'right') => (
-    <Box sx={{ width: 340, margin: 2 }} role="presentation">
+    <Box
+      sx={{ width: 340, margin: 2 }}
+      role="presentation"
+    >
       <TitleDrawer>New Template</TitleDrawer>
       <Divider />
       <InfoDrawer>Custom Templates</InfoDrawer>
@@ -77,18 +83,18 @@ export const TemplateForm = () => {
       <br />
       <Form onSubmit={handleSubmit(onSubmit)}>
         <InfoDrawer>Location</InfoDrawer>
-        <Select {...register('location')}>
-          <Option value={'PE'}>PE</Option>
-          <Option value={'USA'}>USA</Option>
-          <Option value={'SV'}>SV</Option>
+        <Select {...register("location")}>
+            <Option value={'PE'}>PE</Option>
+            <Option value={'USA'}>USA</Option>
+            <Option value={'SV'}>SV</Option>
         </Select>
         <InfoDrawer>Template</InfoDrawer>
-        <Input {...register('template')} type={'text'} />
+        <Input {...register("template")} type={'text'} />
         <InfoDrawer>Description</InfoDrawer>
-        <TextArea {...register('description')}>Enter text here....</TextArea>
+        <TextArea {...register("description")}>Enter text here....</TextArea>
         <Section>
-          <CancelButton onClick={toggleDrawer(anchor, false)}>Cancel</CancelButton>
-          <SaveButton onClick={handleSubmit(onSubmit)}>Save</SaveButton>
+            <CancelButton onClick={toggleDrawer(anchor, false)}>Cancel</CancelButton>
+            <SaveButton onClick={handleSubmit(onSubmit)}>Save</SaveButton>
         </Section>
       </Form>
     </Box>
@@ -110,11 +116,20 @@ export const TemplateForm = () => {
       <Drawer anchor={'right'} open={state['right']} onClose={toggleDrawer('right', false)}>
         {list('right')}
       </Drawer>
+
+      {
+        template.map(item => {
+            return (
+                <CardTemplate template={item}/>
+            )
+        })
+      }
     </Container>
   )
 }
 
-const Form = styled('form')``
+const Form = styled('form')`
+`
 
 const Section = styled('div')`
   display: flex;
