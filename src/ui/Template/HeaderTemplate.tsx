@@ -5,7 +5,6 @@ export default function HeaderTemplate() {
     <Container>
       <HeaderInfo>Template</HeaderInfo>
       <HeaderInfo>Location</HeaderInfo>
-      <HeaderInfo>Schedule</HeaderInfo>
       <HeaderInfo>Description</HeaderInfo>
     </Container>
   )
