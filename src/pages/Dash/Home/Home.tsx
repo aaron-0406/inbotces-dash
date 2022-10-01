@@ -16,7 +16,7 @@ export const Home = () => {
 
   useEffect(() => {
     getCodeUrl()
-  }, [])
+  }, [getCodeUrl])
 
   return (
     <Container>
