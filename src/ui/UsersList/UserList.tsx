@@ -30,7 +30,9 @@ export default function UserList() {
       <HeaderMembers />
       <Scroll>
         {users.map((user: any) => {
-          return <CardMember nameUser={user.name} country={user.country} />
+          return (
+            <CardMember nameUser={user.name} country={user.country} wageAmount={user.wage} totalTime={user.totalTime} />
+          )
         })}
       </Scroll>
     </Container>

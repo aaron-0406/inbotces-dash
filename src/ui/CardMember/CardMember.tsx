@@ -5,9 +5,11 @@ import styled from 'styled-components'
 interface CardMemberProps {
   nameUser: string
   country: string
+  wageAmount: string
+  totalTime: string
 }
 
-export const CardMember = ({ nameUser, country }: CardMemberProps) => {
+export const CardMember = ({ nameUser, country, wageAmount, totalTime }: CardMemberProps) => {
   return (
     <TableItemMember>
       <Section>
@@ -16,8 +18,8 @@ export const CardMember = ({ nameUser, country }: CardMemberProps) => {
       </Section>
       <Info>Developer</Info>
       <Info>{country}</Info>
-      <Info>9 USD</Info>
-      <Info>298:49:14</Info>
+      <Info>{wageAmount} USD</Info>
+      <Info>{totalTime}</Info>
       <Section>
         <Button textColor="#389E0D" backgroundColor="#B7EB8F">
           Approved
