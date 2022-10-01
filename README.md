@@ -17,29 +17,35 @@
 Welcome to this repository, in this case, you will find the code made by the frontend devs, made with love and dream :).
 
 # Concept <a name = "concept"></a>
-We dont have concept... For the moment. 
+We dont have concept... For the moment. Good loock.
 
 # Screens<a name = "screens"></a>
-1. List of users on clockify
+1. Login
 
 <p align="center">
- <img src="./src/01.png" alt="List of users" width="100%">
+ <img src="./screenshot/login.png" alt="List of users" width="100%">
 </p>
 
-2. Total hours per employee report
+2. Permissions
 
 <p align="center">
- <img src="./src/02.png" alt="List of users" width="100%">
+ <img src="./screenshot/permissions.png" alt="List of users" width="100%">
 </p
 >
-3. Edit options per employee
+3. List of Users
 
 <p align="center">
- <img src="./src/03.png" alt="List of users" width="100%">
+ <img src="./screenshot/listUsers.png" alt="List of users" width="100%">
 </p>
 
-4. Template adapted by country
+4. Template
 
 <p align="center">
- <img src="./src/03.png" alt="List of users" width="100%">
+ <img src="./screenshot/templates.png" alt="List of users" width="100%">
+</p>
+
+5. Template
+
+<p align="center">
+ <img src="./screenshot/add_template.png" alt="List of users" width="100%">
 </p>
