@@ -7,9 +7,10 @@ interface CardMemberProps {
   country: string
   wageAmount: string
   totalTime: string
+  status: string
 }
 
-export const CardMember = ({ nameUser, country, wageAmount, totalTime }: CardMemberProps) => {
+export const CardMember = ({ nameUser, country, wageAmount, totalTime, status }: CardMemberProps) => {
   return (
     <TableItemMember>
       <Section>
@@ -22,7 +23,7 @@ export const CardMember = ({ nameUser, country, wageAmount, totalTime }: CardMem
       <Info>{totalTime}</Info>
       <Section>
         <Button textColor="#389E0D" backgroundColor="#B7EB8F">
-          Approved
+          {status}
         </Button>
       </Section>
     </TableItemMember>
