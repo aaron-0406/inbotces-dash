@@ -2,7 +2,6 @@ import { CardMember } from '../CardMember/CardMember'
 import { HeaderMembers } from '../HeaderMembers/HeaderMembers'
 import NavBarFilter from '../NavBarFilter/NavBarFilter'
 import styled from 'styled-components'
-import { useGeneralContext } from '../../shared/contexts/StoreProvider'
 import { AxiosResponse } from 'axios'
 import { getUsersAxios } from '../../shared/services/usersServices'
 import { useEffect, useState } from 'react'
@@ -31,7 +30,15 @@ export default function UserList() {
       <HeaderMembers />
       <Scroll>
         {users.map((user: any) => {
-          return <CardMember nameUser={user.name} country={user.country} />
+          return (
+            <CardMember
+              nameUser={user.name}
+              country={user.country}
+              wageAmount={user.wage}
+              totalTime={user.totalTime}
+              status={user.status}
+            />
+          )
         })}
       </Scroll>
     </Container>
