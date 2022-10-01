@@ -11,7 +11,7 @@ export const Home = () => {
 
   const getCodeUrl = useCallback(() => {
     const search = queryString.parse(window.location.search) as { code: string }
-    if (search && search.code.length) setCode(search.code)
+    if (search && search?.code?.length) setCode(search.code)
   }, [setCode])
 
   useEffect(() => {
