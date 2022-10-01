@@ -13,12 +13,13 @@
     "@types/node": "^16.7.13",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
-    "antd": "^4.23.3",
     "@types/react-router-dom": "^5.3.3",
+    "antd": "^4.23.3",
     "axios": "^0.27.2",
     "jwt-decode": "^3.1.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.36.1",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "styled-components": "^5.3.6",
@@ -51,9 +52,9 @@
     ]
   },
   "devDependencies": {
+    "@types/axios": "^0.14.0",
     "@types/jwt-decode": "^3.1.0",
     "@types/styled-components": "^5.1.26",
-    "@types/axios": "^0.14.0",
     "prettier": "^2.3.2"
   }
 }

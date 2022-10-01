@@ -1,12 +1,40 @@
+import {SubmitHandler, useForm} from 'react-hook-form';
+import { useEffect, useState } from 'react'
+
+import { API } from '../../shared/utils/constant/api';
 import Box from '@mui/material/Box'
 import { Button } from '../Button'
 import Drawer from '@mui/material/Drawer'
 import HeaderTemplate from './HeaderTemplate'
+import axios from 'axios'
 import styled from 'styled-components'
-import { useState } from 'react'
+
+enum LocationEnum {
+    PE = "PE",
+    USD = "USA",
+    SV = "SV"
+  }
+export interface IFormInput {
+    location: LocationEnum | undefined;
+    template: string | undefined;
+    description: string | undefined;
+  }
 
 export const TemplateForm = () => {
   const [state, setState] = useState({ right: false })
+  const { register, handleSubmit } = useForm<IFormInput>();
+  
+    useEffect(()=> {
+        const getTemplates = async () => {
+            try {
+                const {data} = await axios.get(`${API}/template`)
+                console.log(data)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        getTemplates();
+    },[])
 
   const toggleDrawer = (anchor: 'right', open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
     if (
@@ -19,12 +47,27 @@ export const TemplateForm = () => {
     setState({ ...state, [anchor]: open })
   }
 
+  const onSubmit: SubmitHandler<IFormInput> = async data => {
+    console.log(data)
+    try {
+        const resp = await axios.post(`${API}/template/`, {
+            template: data.template,
+            location: data.location,
+            description: data.description
+        })
+        if(!resp){
+            return console.log("error")
+        }
+        toggleDrawer('right', false);
+    } catch (error) {
+        console.log(error)
+    }
+  };
+
   const list = (anchor: 'right') => (
     <Box
       sx={{ width: 340, margin: 2 }}
       role="presentation"
-      //onClick={toggleDrawer(anchor, false)}
-      //onKeyDown={toggleDrawer(anchor, false)}
     >
       <TitleDrawer>New Template</TitleDrawer>
       <Divider />
@@ -35,20 +78,22 @@ export const TemplateForm = () => {
         information.
       </InfoDrawer>
       <br />
-      <InfoDrawer>Location</InfoDrawer>
-      <Select>
-        <Option value={'pe'}>PE</Option>
-        <Option value={'usa'}>USA</Option>
-        <Option value={'sv'}>SV</Option>
-      </Select>
-      <InfoDrawer>Template</InfoDrawer>
-      <Input type={'text'} />
-      <InfoDrawer>Description</InfoDrawer>
-      <TextArea>Enter text here....</TextArea>
-      <Section>
-        <CancelButton onClick={toggleDrawer(anchor, false)}>Cancel</CancelButton>
-        <SaveButton>Save</SaveButton>
-      </Section>
+      <Form onSubmit={handleSubmit(onSubmit)}>
+        <InfoDrawer>Location</InfoDrawer>
+        <Select {...register("location")}>
+            <Option value={'PE'}>PE</Option>
+            <Option value={'USA'}>USA</Option>
+            <Option value={'SV'}>SV</Option>
+        </Select>
+        <InfoDrawer>Template</InfoDrawer>
+        <Input {...register("template")} type={'text'} />
+        <InfoDrawer>Description</InfoDrawer>
+        <TextArea {...register("description")}>Enter text here....</TextArea>
+        <Section>
+            <CancelButton onClick={toggleDrawer(anchor, false)}>Cancel</CancelButton>
+            <SaveButton onClick={handleSubmit(onSubmit)}>Save</SaveButton>
+        </Section>
+      </Form>
     </Box>
   )
 
@@ -71,6 +116,9 @@ export const TemplateForm = () => {
     </Container>
   )
 }
+
+const Form = styled('form')`
+`
 
 const Section = styled('div')`
   display: flex;
