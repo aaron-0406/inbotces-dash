@@ -1,16 +1,21 @@
+import { Button } from '../Button';
+import { DatePicker } from 'antd';
 import styled from 'styled-components';
 
 export default function NavBarFilter() {
-  return (
+
+    const { RangePicker } = DatePicker;
+  
+    return (
     <Container>
         <Title>Members</Title>
         <Section>
-            <div>
-                asd
-            </div>
-            <div>
-                asd
-            </div>
+            <Section>
+                <Button type='dashed'> Filter</Button>
+            </Section>
+            <Section>
+                <RangePicker />
+            </Section>
         </Section>
     </Container>
   )
@@ -24,6 +29,7 @@ const Container = styled('div')`
 const Section = styled('div')`
     display: flex;
     align-items: center;
+    margin-right: 10px;
 `
 
 const Title = styled('p')`

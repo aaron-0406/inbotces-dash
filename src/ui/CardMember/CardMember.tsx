@@ -11,6 +11,10 @@ interface CardMemberProps {
 }
 
 export const CardMember = ({ nameUser, country, wageAmount, totalTime, status }: CardMemberProps) => {
+  
+  const textColor = status.charAt(0) === 'P' ? 'black' : '#389E0D';
+  const bgColor = status.charAt(0) === 'P' ? '#D9D9D9' : '#B7EB8F';
+
   return (
     <TableItemMember>
       <Section>
@@ -22,8 +26,8 @@ export const CardMember = ({ nameUser, country, wageAmount, totalTime, status }:
       <Info>{wageAmount} USD</Info>
       <Info>{totalTime}</Info>
       <Section>
-        <Button textColor="#389E0D" backgroundColor="#B7EB8F">
-          {status}
+        <Button textColor={textColor} backgroundColor={bgColor} shape='round'>
+          {status.charAt(0).toUpperCase() + status.slice(1).toLowerCase()}
         </Button>
       </Section>
     </TableItemMember>
@@ -40,15 +44,16 @@ const TableItemMember = styled('div')`
 
 const Section = styled('div')`
   display: flex;
-  justify-content: center;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
 `
 
 const Avatar = styled('img')`
   width: 32px;
   height: 32px;
   border-radius: 99px;
+  margin-left: 8px;
 `
 
 const NameTitle = styled('p')`
@@ -58,6 +63,7 @@ const NameTitle = styled('p')`
   font-weight: 700;
   font-size: 15px;
   line-height: 24px;
+  width: 80%;
   /* identical to box height, or 160% */
 
   letter-spacing: 0.75px;
