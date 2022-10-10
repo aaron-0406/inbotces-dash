@@ -173,7 +173,7 @@ export const TemplateForm = () => {
         <TextArea {...register("template")} onChange={(e)=>{
           setTextTemplate(e.target.value);
           setValue('template',e.target.value);
-        }} value={textTemplate} />
+        }} value={textTemplate} rows={5} />
         <InfoDrawer>Select Location</InfoDrawer>
         <Select {...register("location", {value : optionValue })} size='small' value={optionValue}  style={{width: "100%"}} onChange={handleChange}>
             <Option value='PE'>PE</Option>
@@ -186,6 +186,7 @@ export const TemplateForm = () => {
             setTextDescription(e.target.value);
             }}
             value={textDescription}
+            rows={2}
         />
         <Section>
             <CancelButton onClick={()=> {
