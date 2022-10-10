@@ -12,7 +12,7 @@ export default function HeaderTemplate() {
 
 const Container = styled('div')`
   display: grid;
-  grid-template-columns: 3fr 1fr 1fr 1fr;
+  grid-template-columns: 3fr 1fr 1fr;
   gap: 8px;
   align-items: center;
   padding-block: 10px;

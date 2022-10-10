@@ -1,41 +1,97 @@
-import styled from 'styled-components';
+import { DeleteOutlined, EditOutlined } from '@ant-design/icons'
+import { Modal, message } from 'antd'
+import axios, { AxiosError } from 'axios';
 
+import { API } from '../../shared/utils/constant/api';
+import { Button } from '../Button';
+import styled from 'styled-components';
+import { useState } from 'react';
+
+export interface TemplateInterface{
+    template: string,
+    location: string,
+    description: string,
+    uuid: string
+}
 interface PropsCardTemplate{
-    template: 
-    {template: string,
-        location: string,
-        description: string,
-    } | undefined
+    template: TemplateInterface,
+    reload : () => void;
+    edit: (template:TemplateInterface ) => void;
 }
 
-export default function CardTemplate({template}:PropsCardTemplate) {
+export default function CardTemplate({template, reload, edit}:PropsCardTemplate) {
+
+    const [open, setOpen] = useState(false);
+    const [confirmLoading, setConfirmLoading] = useState(false);
+
+
+    const handleOk = async() => {
+        setConfirmLoading(true);
+        await removeItem();
+        reload();
+        setConfirmLoading(false);
+        setOpen(false);
+      };
+
+      const removeItem = async () => {
+        try {
+            const {status } = await axios.delete(`${API}/template/${template?.uuid}`)
+            if (status === 200) {
+                message.success('The item has been removed')
+            }
+        } catch (error) {
+            const err = error as AxiosError;
+            message.success(err.message)
+        }
+      }
+ 
   return (
     <Container>
         <TemplateInfo>
-            {template?.template}
+            {template.template}
         </TemplateInfo>
         <AllInfo>
-            {template?.location}
+            {template.location}
         </AllInfo>
-        <AllInfo>
-            {template?.description}
-        </AllInfo>
+        <SectionDescription>
+            <AllInfo>
+                {template.description}
+            </AllInfo>
+            <SectionAction>
+                <Button borderColor='transparent' style={{padding: 5}} onClick={() => edit(template)}>
+                    <EditOutlined />
+                </Button>
+                <Button borderColor='transparent' style={{padding: 5}} onClick={()=>setOpen(true)} >
+                    <DeleteOutlined />
+                </Button>
+            </SectionAction>
+        </SectionDescription>
+
+        <Modal
+            title="Do you Want to delete these items?"
+            open={open}
+            onOk={handleOk}
+            confirmLoading={confirmLoading}
+            onCancel={()=>setOpen(false)}
+        >
+            <p>This item will be removed </p>
+        </Modal>
     </Container>
   )
 }
 
 const Container = styled('div')`
   display: grid;
-  grid-template-columns: 3fr 1fr 1fr 1fr;
+  grid-template-columns: 3fr 1fr 1fr;
   gap: 8px;
   align-items: center;
   padding-block: 10px;
 
-  background-color: #fafafa;
+  background-color: #fff;
 `
 
 const TemplateInfo = styled('p')`
-    margin: 0;
+    margin: 24px;
     font-family: 'DM Sans';
     font-style: normal;
     font-weight: 400;
@@ -62,6 +118,21 @@ const AllInfo = styled('p')`
     letter-spacing: 1px;
 
     /* Neutral / 7 */
-
+    margin: 5px;
     color: #8C8C8C;
+`
+
+const SectionDescription = styled('div')`
+    display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin: 14px;
+`
+
+const SectionAction = styled('div')`
+    display: flex;
+    flex-direction: row;
+    width: 20%;
+    margin-right: 5px;
 `
