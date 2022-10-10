@@ -47,6 +47,8 @@ export default function UserList() {
               wageAmount={user.wage}
               totalTime={user.totalTime}
               status={user.status}
+              uuid={user.uuid}
+              reload= {getUsers}
             />
           )
         })
