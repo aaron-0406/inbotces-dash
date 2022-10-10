@@ -1,19 +1,55 @@
+import { InputNumber, Modal, message } from 'antd'
+import axios, { AxiosError } from 'axios'
+
+import { API } from '../../shared/utils/constant/api'
 import Bot from '../../shared/assets/Logo.svg'
 import { Button } from '../Button'
+import { EditOutlined } from '@ant-design/icons'
 import styled from 'styled-components'
+import { useState } from 'react'
 
 interface CardMemberProps {
   nameUser: string
   country: string
   wageAmount: string
   totalTime: string
-  status: string
+  status: string,
+  uuid: string,
+  reload: () => void
 }
 
-export const CardMember = ({ nameUser, country, wageAmount, totalTime, status }: CardMemberProps) => {
+export const CardMember = ({ nameUser, country, wageAmount, totalTime, status, uuid, reload }: CardMemberProps) => {
   
   const textColor = status.charAt(0) === 'P' ? 'black' : '#389E0D';
   const bgColor = status.charAt(0) === 'P' ? '#D9D9D9' : '#B7EB8F';
+
+  const [modalOpen, setModalOpen] = useState(false);
+  const [confirmLoading, setConfirmLoading] = useState(false);
+  const [wage, setWage] = useState(parseInt(wageAmount));
+
+  const updateWage = async() => {
+    setConfirmLoading(true);
+    console.log(`${API}/team-member/${uuid}`);
+    try {
+      const {status } = await axios.put(`${API}/team-member/${uuid}`, {
+        wage
+      })
+      if(status === 200) {
+        message.success('Wage update successful');
+        reload();
+        setModalOpen(false);
+      }
+    } catch (error) {
+      const err = error as AxiosError;
+      message.error(err.message)
+    }
+    setConfirmLoading(false);
+
+  }
+  
+  const onChange = (value: number | null) => {
+    setWage(value === null ? 3 : value); 
+  };
 
   return (
     <TableItemMember>
@@ -23,13 +59,32 @@ export const CardMember = ({ nameUser, country, wageAmount, totalTime, status }:
       </Section>
       <Info>Developer</Info>
       <Info>{country}</Info>
-      <Info>{wageAmount} USD</Info>
+      <Section>
+        <Info>{wageAmount} USD</Info>
+        <Button borderColor='transparent' style={{padding: 5}} onClick={() => setModalOpen(true)}>
+            <EditOutlined />
+        </Button>
+      </Section>
       <Info>{totalTime}</Info>
       <Section>
         <Button textColor={textColor} backgroundColor={bgColor} shape='round'>
           {status.charAt(0).toUpperCase() + status.slice(1).toLowerCase()}
         </Button>
       </Section>
+
+      <Modal
+        title={`Update Wage for ${nameUser}`}
+        centered
+        visible={modalOpen}
+        onOk={() => updateWage()}
+        confirmLoading={confirmLoading}
+        onCancel={() => {
+          setModalOpen(false);
+          setWage(parseInt(wageAmount));
+        }}
+      >
+        <InputNumber min={1} max={50} onChange={onChange} value={wage} addonAfter="$" />
+      </Modal>
     </TableItemMember>
   )
 }
