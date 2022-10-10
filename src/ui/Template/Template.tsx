@@ -161,7 +161,7 @@ export const TemplateForm = () => {
       <Dropdown overlay={menu}>
         <Button style={{width:'100%', fontFamily:'SF Pro Tex'}} type={'dashed'}>
           <Space>
-            Avalaible Variables
+            Available Variables
             <DownOutlined />
           </Space>
         </Button>
