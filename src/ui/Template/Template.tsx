@@ -87,7 +87,7 @@ export const TemplateForm = () => {
             return console.log("error")
         }
         getTemplates();
-        setState({ ...state, ['right']: false });
+        setState({ ...state, 'right': false });
         setTextTemplate('');
         setTextDescription('');
         setValue('location','PE');
@@ -113,7 +113,7 @@ export const TemplateForm = () => {
       setTextDescription(template.description);
       setOptionValue(template.location);
       setUuidTemplate(template.uuid);
-      setState({ ...state, ['right']: true });
+      setState({ ...state, 'right': true });
       setValue('location',template.location);
       setValue('template', template.template);
       setValue('description', template.description);
@@ -129,7 +129,7 @@ export const TemplateForm = () => {
       })
       console.log(resp.status)
       getTemplates();
-      setState({ ...state, ['right']: false });
+      setState({ ...state, 'right': false });
       setTextTemplate('');
       setTextDescription('');
       setValue('location','PE');
@@ -189,7 +189,7 @@ export const TemplateForm = () => {
         />
         <Section>
             <CancelButton onClick={()=> {
-              setState({ ...state, ['right']: false });
+              setState({ ...state, 'right': false });
               setTextTemplate('');
               setTextDescription('');
               setValue('location','PE');
@@ -246,7 +246,7 @@ export const TemplateForm = () => {
         </Section>
         <HeaderTemplate />
         <Drawer anchor={'right'} open={state['right']} onClose={()=> {
-          setState({ ...state, ['right']: false });
+          setState({ ...state, 'right': false });
           setTextTemplate('');
           setTextDescription('');
           setValue('location','PE');
