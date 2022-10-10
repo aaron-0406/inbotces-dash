@@ -1,6 +1,8 @@
-import { createGlobalStyle, css } from 'styled-components'
 import './fonts/dmsans/stylesheet.css'
 import './fonts/raleway/stylesheet.css'
+import 'antd/dist/antd.css';
+
+import { createGlobalStyle, css } from 'styled-components'
 
 const generic = css`
   html,

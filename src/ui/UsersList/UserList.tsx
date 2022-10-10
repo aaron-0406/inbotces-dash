@@ -4,20 +4,24 @@ import { AxiosResponse } from 'axios'
 import { CardMember } from '../CardMember/CardMember'
 import { HeaderMembers } from '../HeaderMembers/HeaderMembers'
 import NavBarFilter from '../NavBarFilter/NavBarFilter'
+import { SkeltonUserList } from './SkeletonUserList'
 import { getUsersAxios } from '../../shared/services/usersServices'
 import styled from 'styled-components'
 
 export default function UserList() {
   const [users, setUsers] = useState([])
+  const [loading, setLoading] = useState(true)
 
   const getUsers = async () => {
     try {
       const result: AxiosResponse<any, any> = await getUsersAxios()
       if (result) {
         setUsers(result.data)
+        setLoading(false)
       }
     } catch (e) {
       console.log(e)
+      setLoading(false)
     }
   }
 
@@ -30,9 +34,14 @@ export default function UserList() {
       <NavBarFilter />
       <HeaderMembers />
       <Scroll>
-        {users.map((user: any) => {
+        {
+        loading ?
+        <SkeltonUserList quantity={9}/>
+        :
+        users.map((user: any, id) => {
           return (
             <CardMember
+              key={id}
               nameUser={user.name}
               country={user.country}
               wageAmount={user.wage}
@@ -40,7 +49,8 @@ export default function UserList() {
               status={user.status}
             />
           )
-        })}
+        })
+        }
       </Scroll>
     </Container>
   )
