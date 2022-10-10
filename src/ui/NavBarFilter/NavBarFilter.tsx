@@ -30,6 +30,7 @@ const Section = styled('div')`
     display: flex;
     align-items: center;
     margin-right: 10px;
+    visibility: hidden;
 `
 
 const Title = styled('p')`
