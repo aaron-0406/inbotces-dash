@@ -26,10 +26,10 @@ const Container = styled('div')`
   align-items: center;
 `
 const Section = styled('div')`
-  display: flex;
-  align-items: center;
-  margin-right: 10px;
-  visibility: hidden;
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+    visibility: hidden;
 `
 
 const Title = styled('p')`
